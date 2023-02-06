@@ -13,7 +13,7 @@ public class UserDaoService {
 	// UserDaoService > Static List
 
 	private static List<User> users = new ArrayList<>();
-	
+
 	private static int usersCount = 0;
 
 	static {
@@ -22,11 +22,10 @@ public class UserDaoService {
 		users.add(new User(usersCount++, "Ribeiro", LocalDate.now().minusYears(29)));
 	}
 
+	// public List<User> findAll()
 	public List<User> findAll() {
 		return users;
 	}
-
-	// public List<User> findAll()
 
 	// public User save(User user)
 	public User save(User user) {
@@ -35,11 +34,16 @@ public class UserDaoService {
 		return user;
 	}
 
-
 	// public User findOne(int id)
 	public User findOne(int id) {
 		java.util.function.Predicate<? super User> predicate = user -> user.getId().equals(id);
 		return users.stream().filter(predicate).findFirst().orElse(null);
+	}
+
+	// Delete by User (int id)
+	public void deleteById(int id) {
+		java.util.function.Predicate<? super User> predicate = user -> user.getId().equals(id);
+		users.removeIf(predicate);
 	}
 
 }

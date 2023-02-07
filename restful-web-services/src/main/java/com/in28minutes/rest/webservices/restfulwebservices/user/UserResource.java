@@ -33,16 +33,6 @@ public class UserResource {
 		return service.findAll();
 	}
 	
-	
-	// http://localhost:8080/users
-	
-	// EntityModel
-	// WebMvcLinkBuilder
-	
-	
-	
-	
-
 	// GET /users/{id}
 	@GetMapping("/users/{id}")
 	public EntityModel<User> retrieveUser(@PathVariable int id) {

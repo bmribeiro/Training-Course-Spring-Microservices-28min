@@ -15,26 +15,26 @@ import jakarta.validation.constraints.Size;
 
 @Entity(name = "user_details")
 public class User {
-	
+
 	protected User() {
-		
+
 	}
-	
+
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Size(min = 2, message = "Name should have at least 2 characters")
 	@JsonProperty("user_name")
 	private String name;
-	
+
 	@Past(message = "Birth Date should be in the past")
 	@JsonProperty("birth_date")
 	private LocalDate birthDate;
-	
+
 	@OneToMany(mappedBy = "user")
-	@JsonIgnore
-	private List<Post> posts; 
+	// @JsonIgnore
+	private List<Post> posts;
 
 	public User(Integer id, String name, LocalDate birthDate) {
 		super();
@@ -67,10 +67,17 @@ public class User {
 		this.birthDate = birthDate;
 	}
 
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", birthDate=" + birthDate + "]";
 	}
-
 
 }

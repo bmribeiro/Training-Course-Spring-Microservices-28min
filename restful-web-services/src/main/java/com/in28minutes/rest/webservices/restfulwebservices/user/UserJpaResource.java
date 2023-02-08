@@ -35,7 +35,7 @@ public class UserJpaResource {
 	public List<User> retrieveAllUsers() {
 		return repository.findAll();
 	}
-	
+
 	// GET /users/{id}
 	@GetMapping("/jpa/users/{id}")
 	public EntityModel<User> retrieveUser(@PathVariable int id) {
@@ -45,19 +45,32 @@ public class UserJpaResource {
 		if (user.isEmpty()) {
 			throw new UserNotFoundException("id:" + id);
 		}
-		
+
 		EntityModel<User> entityModel = EntityModel.of(user.get());
-		
+
 		WebMvcLinkBuilder link = linkTo(methodOn(this.getClass()).retrieveAllUsers());
 		entityModel.add(link.withRel("all-users"));
-		
+
 		return entityModel;
 	}
 
 	// DELETE /users/{id}
 	@DeleteMapping("/jpa/users/{id}")
-	public void DeleteUser(@PathVariable int id) {
+	public void deleteUser(@PathVariable int id) {
 		repository.deleteById(id);
+	}
+
+	// GET /users/{id}/posts
+	@GetMapping("/jpa/users/{id}/posts")
+	public List<Post> retrievePostsForUser(@PathVariable int id) {
+
+		Optional<User> user = repository.findById(id);
+
+		if (user.isEmpty()) {
+			throw new UserNotFoundException("id:" + id);
+		}
+		
+		return user.get().getPosts();
 	}
 
 	// POST /users

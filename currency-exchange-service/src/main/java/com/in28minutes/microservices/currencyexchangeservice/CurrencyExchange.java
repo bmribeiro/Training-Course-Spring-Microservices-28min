@@ -58,4 +58,5 @@ public class CurrencyExchange {
 		return "CurrencyExchange [id=" + id + ", from=" + from + ", to=" + to + ", conversionMultiple="
 				+ conversionMultiple + "]";
 	}
+	
 }

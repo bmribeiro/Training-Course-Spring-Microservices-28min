@@ -11,7 +11,6 @@ public class CurrencyExchangeController {
 
 	@GetMapping("/currency-exchange/from/{from}/to/{to}")
 	public CurrencyExchange retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
-
 		return new CurrencyExchange(1000L, from, to, BigDecimal.valueOf(50));
 	}
 }
